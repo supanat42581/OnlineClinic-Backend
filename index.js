@@ -1,22 +1,25 @@
+require("dotenv").config();
+require('./config/passport')
+
 const express = require('express')
 const app = express();
 const db = require('./models')
-require("dotenv").config();
+
 const fileUpload = require('express-fileupload')
 const userRoutes = require('./routes/user')
 const bookingRoutes = require('./routes/booking')
 const catagoryRoutes = require('./routes/catagory')
 const courseRoutes = require('./routes/course')
 const doctorRoutes = require('./routes/doctor')
-require('./config/passport')
 
+const cors = require("cors");
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 app.use(express.static('./images'));
-
+app.use(cors())
 
 app.use("/user", userRoutes);
 app.use("/booking", bookingRoutes)

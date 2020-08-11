@@ -6,9 +6,10 @@ const auth = passport.authenticate("jwt", { session: false });
 
 
 router.get("/", auth, controllers.getAllCourses);
-router.get("/:id", auth, controllers.getCourseById);
+router.get("/search", auth, controllers.getCourseBySearch);
 router.get("/:catagory", auth, controllers.getCourseByCatagory)
 router.post("/", auth, controllers.createCourse)
+
 
 
 module.exports = router;

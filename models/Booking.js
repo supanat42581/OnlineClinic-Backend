@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
         },status:{
             allowNull:true, defaultValue: "AVAILABLE" ,
             type: DataTypes.ENUM("AVAILABLE","PENDING","SUCCESS")
+        },bookingId:{
+            allowNull:false,
+            type: DataTypes.INTEGER
         }
     },
     {

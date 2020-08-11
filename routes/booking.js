@@ -6,7 +6,7 @@ const auth = passport.authenticate("jwt", { session: false });
 
 
 router.post("/", auth, controllers.createBooking);
-router.get("/:id", auth, controllers.userGetBooking);
+router.get("/", auth, controllers.userGetBooking);
 router.get("/doctor/:id", auth, controllers.doctorGetBooking);
 router.patch("/pending/:id", auth, controllers.updatePendingBooking);
 router.patch("/success/:id", auth, controllers.updateSuccessBooking);

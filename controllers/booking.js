@@ -1,9 +1,9 @@
 const db = require("../models");
 
 const userGetBooking = async (req, res, next) => {
-    const bookingId = req.params.id;
+
     try {
-        const allCourses = await db.Booking.findAll({ where: { user_id: bookingId } });
+        const allCourses = await db.Booking.findAll({ where: { user_id: req.user.id } });
     res.status(200).send(allCourses)
     
     } catch (err) {
@@ -27,14 +27,17 @@ const doctorGetBooking = async (req, res, next) => {
 
 
 const createBooking = async (req, res) => {
-    const { date, status,user_id, course_id, doctor_id } = req.body;
+    const { date, status,user_id, course_id, doctor_id, bookingId } = req.body;
 try{
+    console.log(req.body
+        )
     const booking = await db.Booking.create({
         date,
         status,
-        user_id, 
+        user_id:req.user.id, 
         course_id,
-        doctor_id 
+        doctor_id,
+        bookingId 
     });
 
     res.status(201).send(booking);}

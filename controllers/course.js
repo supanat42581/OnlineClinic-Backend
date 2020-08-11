@@ -14,22 +14,10 @@ const getAllCourses = async (req, res, next) => {
 };
 
 
-const getCourseById = async (req, res) => {
-    const targetCourseId = req.params.id;
-    const targetCourse = await db.Course.findOne({ where: { id:targetCourseId }});
-
-    if (targetCourse) {
-        res.status(200).send(targetCourse);
-    } else {
-        res.status(404).send({ message: `Course ID: ${targetcourseId} Not Found` });
-    }
-
-};
-
-
 const getCourseByCatagory = async (req,res) => {
     try {
-    const courseInCatagory = await db.Course.findAll({where: {catagory_id: catagory_id}})
+    const categoryId = req.params.catagory
+    const courseInCatagory = await db.Course.findAll({where: {catagory_id:categoryId}})
     res.status(200).send(courseInCatagory)
     
     } catch (err) {
@@ -39,16 +27,16 @@ const getCourseByCatagory = async (req,res) => {
 
 
 
-// const getCourseById = async (req, res) => {
-//     const targetCourseId = req.params.id;
-//     const targetCourse = await db.Course.findOne({ where: { targetCourseId:{[Op.Like]: "%brain"}} });
-//     if (targetCourse) {
-//         res.status(200).send(targetCourse);
-//     } else {
-//         res.status(404).send({ message: `Course ID: ${targetcourseId} Not Found` });
-//     }
+const getCourseBySearch = async (req, res) => {
+    const targetCourseName = req.query.name;
+    const targetCourse = await db.Course.findAll({ where: { name: {[Op.like]: `%${targetCourseName}%` } } });
+    if (targetCourse) {
+        res.status(200).send(targetCourse);
+    } else {
+        res.status(404).send({ message: `Course Name: ${targetCourse} Not Found` });
+    }
+};
 
-// };
 
 const createCourse = async (req, res) => {
     const { name, price, catagory } = req.body;
@@ -65,8 +53,8 @@ const createCourse = async (req, res) => {
 
 module.exports = {
     getAllCourses,
-    getCourseById,
     createCourse,
-    getCourseByCatagory
+    getCourseByCatagory,
+    getCourseBySearch
 }
  
