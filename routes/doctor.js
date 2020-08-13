@@ -7,6 +7,7 @@ const auth = passport.authenticate("jwt", { session: false });
 
 
 router.post("/", auth, controllers.createDoctor)
+router.get("/:id", auth, controllers.getDoctor)
 
 
 module.exports = router;

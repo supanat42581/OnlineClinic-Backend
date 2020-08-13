@@ -13,7 +13,21 @@ const createDoctor = async (req, res) => {
     res.status(201).send(newDoctor);
 };
 
+const getDoctor = async (req, res) => {
+    const doctorId = req.params.id;
+    try {
+        const allCourses = await db.Doctor.findOne({ where: { id: doctorId} });
+    res.status(200).send(allCourses)
+    
+    } catch (err) {
+        next(err)
+    }
+    // res.send(doctorId)
+
+};
+
 
 module.exports = {
     createDoctor,
+    getDoctor
 }
