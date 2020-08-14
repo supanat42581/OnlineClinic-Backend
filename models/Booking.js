@@ -6,9 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         },status:{
             allowNull:true, defaultValue: "AVAILABLE" ,
             type: DataTypes.ENUM("AVAILABLE","PENDING","SUCCESS")
-        },bookingId:{
-            allowNull:false,
-            type: DataTypes.INTEGER
         }
     },
     {
@@ -16,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     })
     Booking.associate = models =>{
         Booking.belongsTo(models.Doctor, {foreignKey: "doctor_id"})
+        Booking.belongsTo(models.Course, {foreignKey: "course_id"})
+        Booking.belongsTo(models.User, {foreignKey: "user_id"})
     }
 
 

@@ -13,15 +13,22 @@ module.exports = (sequelize, DataTypes) => {
             allowNull:false,
             type: DataTypes.STRING
         },
+        image_url:{
+            allowNull:true,
+            type: DataTypes.STRING
+        }
     },
     {
         tableName: "Course",
     })
 
     Course.associate = models =>{
-        Course.belongsToMany(models.User, {through:models.Booking, foreignKey: "course_id"})
+        // Course.hasMany(models.Booking, { foreignKey: "course_id"})
         Course.belongsTo(models.Doctor, {foreignKey: "doctor_id"})
         Course.belongsTo(models.Catagory, {foreignKey: "catagory_id"})
+        Course.belongsToMany(models.User, {through:models.Booking, foreignKey: "course_id"})
+        Course.belongsToMany(models.Doctor, {through:models.Booking, foreignKey: "course_id"})
+
     }
 
     return Course;

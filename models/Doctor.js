@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
 
     Doctor.associate = models =>{
         Doctor.hasMany(models.Course, {foreignKey: "doctor_id"})
-        Doctor.hasMany(models.Booking, {foreignKey: "doctor_id"})
+        Doctor.belongsToMany(models.Course, {through:models.Booking, foreignKey: "doctor_id"})
+        Doctor.belongsToMany(models.User, {through:models.Booking, foreignKey: "doctor_id"})
+
+
 
     }
 

@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.ENUM("Patient")
         },image_url: {
             allowNull: true,
-            type: DataTypes.STRING(1200)
+            type: DataTypes.STRING(200)
         }
 
     },
@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.associate = models =>{
         User.belongsToMany(models.Course, {through:models.Booking, foreignKey: "user_id"})
+        User.belongsToMany(models.Doctor, {through:models.Booking, foreignKey: "user_id"})
     }
 
     return User;

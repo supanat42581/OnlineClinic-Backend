@@ -10,5 +10,5 @@ router.get("/", auth, controllers.userGetBooking);
 router.get("/doctor/:id", auth, controllers.doctorGetBooking);
 router.patch("/pending/:id", auth, controllers.updatePendingBooking);
 router.patch("/success/:id", auth, controllers.updateSuccessBooking);
-router.delete("/:id", auth, controllers.cancelBooking);
+router.delete("/:doctor_id/:course_id", auth, controllers.cancelBooking);
 module.exports = router;
